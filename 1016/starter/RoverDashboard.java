@@ -6,10 +6,10 @@ public class RoverDashboard {
         boolean locked = false;
 
         double batteryPercent = calculateBatteryPercent(energy);
-        int explorationCount = 0; // TODO 1：可完成幾次 6 格能源的探索？
-        int remainingEnergy = 0; // TODO 2：完成上述探索後剩餘能源。
-        boolean validEnergy = false; // TODO 3：0 至 20（包含端點）。
-        boolean canExplore = false; // TODO 4：至少 6 格且未鎖定。
+        int explorationCount = energy / 6; // 每次探索消耗 6 格能源，可完成幾次就用整除
+        int remainingEnergy = energy % 6; // 探索完後剩下的能源
+        boolean validEnergy = energy >= 0 && energy <= 20; // 0 到 20 之間才算有效
+        boolean canExplore = energy >= 6 && !locked; // 至少 6 格且未鎖定才可探索
 
         System.out.println("探測車：" + roverName + "；區域：" + zone);
         System.out.println("能源：" + energy + "；電量百分比：" + batteryPercent);
@@ -18,7 +18,7 @@ public class RoverDashboard {
     }
 
     static double calculateBatteryPercent(int energy) {
-        // TODO 5：傳回百分比；輸出仍由 main 負責。
-        return 0.0;
+        // 電池容量設為 20，依照剩餘能源計算百分比
+        return (energy / 20.0) * 100;
     }
 }
